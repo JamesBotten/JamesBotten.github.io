@@ -1,0 +1,388 @@
+body{
+       font-family: Georgia, 'Times New Roman', Times, serif;
+       background-color: black;
+    }
+.container1{
+    display: flex;
+    flex-direction: row;
+    gap: 150px;
+    padding: 50px; 
+    padding-left: 100px;
+    background-image: url(80sPattern.jpeg);
+    background-size:contain;
+}
+.pfp{
+    height: 400px;
+    width: 400px;
+    border-radius: 50%;
+}
+.popupwindow{
+    background-image: url(windowblue.png);
+    background-repeat: no-repeat; 
+    width: 50em;
+    height: 25em;
+    position:relative;
+}
+
+.centeredwindowtext{
+    padding-top: 15%;
+    padding-left: 10%;
+    width: 40%;
+}
+
+
+.hyperlinktabs{
+    font-size: 15px;
+    padding-top:2px;
+    padding-left:10px;
+   color:rgb(54, 54, 54);
+}
+
+.instruction{font-size:25px;}
+
+.windowflexcontainer{
+    display: flex;
+    flex-direction: row;}
+
+
+.computerimg{
+    height: 125px;
+    width: 125px;
+    padding-top: 100px;
+    padding-left:50px;}
+
+
+.textINwindow1{
+    padding-top: 50px;
+    padding-left: 15px;
+    font-size: 15px;
+    width:50%;}
+
+
+hr{
+    height:10px;
+    color:white;
+    background-color: aliceblue;
+}
+
+.AboutMe-Window{
+    margin-left: 50%;
+    background-image: url(greenwindow.png);
+    width: 100em;
+    height: 25em;
+    background-repeat: no-repeat; 
+}
+
+.aboutme-tab{
+    text-decoration: underline;
+    padding-left: 8px;
+    padding-top: 5px;
+    color:aliceblue;
+}
+
+.aboutme-txt{
+    padding-top: 20px;
+    padding-left: 20px;
+    width: 40%;
+    line-height: 20px;
+    word-spacing: 3px;
+    font-size: 15px;
+}
+.IBM-WEBDEV-badge-container{
+    display: flex;
+    flex-direction: row;
+  
+   gap: 10%;
+   height: fit-content;
+}
+.IBM-CREDIT{
+    width: 275px;
+    height:250px;
+    
+}
+
+.IBM-WEBDEV-badge-txt{
+   padding-top: 15%;
+   font-size: 14px;
+
+}
+
+.MDUB-WINDOW{
+    background-image: url(MDUBWINDOW.png);
+    background-repeat: no-repeat; 
+    width: 100em;
+    height: 40em;
+    margin-left:25px;
+    position:relative;
+}
+button{
+    background-color: aliceblue;
+    text-decoration: solid;
+}
+
+button:hover{
+background-color: rgb(85, 218, 218);
+}
+
+.antiDerivative-Window{
+    background-image: url(windowblue.png);
+    width:100%;
+    height:25em;
+    background-repeat: no-repeat;
+    margin-left: 2%;
+    margin-top:20px;
+    margin-bottom:20px;
+  
+}
+.antiDerivative-FlexContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding-top: 2%;
+}
+
+.antiDerivative-IMG{
+width:250px;
+height:250px;
+padding-left: 1%;
+}
+.antiDerivative-TXT{
+    padding-top: 5%;
+    width: 25%;
+}
+.DrakeTabGame-Window{
+    background-image: url(redwindowM.png);
+    background-repeat: no-repeat;
+    width:fit-content;
+    height:22em;
+    margin-left: 52.5%;
+    margin-top:20px;
+    margin-bottom:20px;
+
+
+}
+.DrakeTabGame-Tab{
+    text-decoration: underline;
+    padding-left: 8px;
+    color:white;
+}
+.DrakeTabGame-FlexContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding-top: 8%;
+    padding-left: 5%;
+}
+.DrakeTabGame-IMG{
+    width: 100px;
+    height:100px;
+    border-radius: 50%;
+}
+.DrakeTabGame-TXT{
+    width: 40%;
+}
+
+.MDUBTV-TAB{
+    font-size: 20px;
+    padding-top:8px;
+    padding-left:15px;
+   color:whitesmoke;
+   text-decoration:underline;}
+
+
+.MDUBTXT{
+    padding-top: 80px;
+    padding-left: 35%;
+    font-size: 20px;
+    width:20%;}
+
+
+.RESUMETXT{
+    color:whitesmoke;
+    text-align: center;
+    line-height: 70px;
+    margin-left: 20%;
+    margin-right:20%;}
+
+
+.texttotheleft{
+    text-align: left;
+    width: 70%}
+
+.WindowsXPBackground{
+    background-image: url(Windowsbackground.jpeg);
+    background-repeat:no-repeat;
+    background-size: cover;
+    padding-top: 75px;
+}
+
+.container2{
+    background-image: url(Windowsbackground.jpeg);
+    background-repeat:no-repeat;
+    background-size: cover;
+}
+
+.container2contact_c2c_left{
+
+display: flex;
+flex-direction: wrap;}
+
+.container2contact_c2c_right{
+
+    display: flex;
+    flex-direction: wrap;
+    margin-left: 52%;}
+
+.ContactWindow_green{
+    margin-left: 20px;
+    background-image: url(greenwindow.png);
+    background-repeat: no-repeat; 
+    width: 60em;
+    height: 25em;
+   gap:50px;}
+
+
+.ContactWindow_blue{
+    background-image: url(windowblue.png);
+    background-repeat: no-repeat; 
+    width: 60em;
+    height: 25em;
+    gap:50px;}
+
+
+.CONTACTTXT{
+padding-top:50px;
+display: flex;
+flex-direction: wrap;
+gap: 50px;
+padding-top:90px;
+padding-left: 100px;}
+
+
+.phone2{
+    height: 125px;
+    width: 125px;
+    padding-top: 20px;}
+
+
+.box1contact{
+    display:inline;
+    width: 250px;}
+
+
+.box2contact{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;}
+
+
+.box3contact{
+    display:inline;
+    width: 250px;
+    font-size: 15px;
+    line-height: 25px;
+}
+
+   .box4contact{
+        padding-top: 8%;
+        padding-left: 5%;
+        width:50%;
+    }
+
+.sociallinkslogos{
+    flex-direction: column;
+    width: 75px;
+    height: 75px;
+}
+
+
+    .sociallinkslogos:hover{
+        height: 90px;
+        width: 90px;
+    }
+
+    .VSCODEWINDOW_blue{
+        background-image: url(windowblue.png);
+        background-repeat: no-repeat; 
+        width: 60em;
+        height: 25em;
+        gap:50px;
+    }
+
+        .MarioProjectWindow_red{
+            margin-left: 20px;
+            background-image: url(redwindowL.png);
+            background-repeat: no-repeat; 
+            width: 61em;
+            height: 35em;
+           gap:50px;}
+.gap{
+    height: 50px;
+}
+
+.gameframe{
+padding-left: 10px;
+padding-top: 15px;
+margin-right: 20%;
+padding-bottom: 20px;
+}
+.VSfinalTXT{
+
+    padding-left: 10px;
+    color:whitesmoke;
+    text-decoration:underline;
+}
+.iframe1{
+    width: 100%;
+    height: 300px;
+}
+.iframe_mario1{
+    width: 100%;
+    height: 375px;
+    margin-left: 20px;
+}
+.iframe_mario2{
+    width: 100%;
+    height: 300px;
+    margin-left: 20px;
+}
+.marioTXT{
+    padding-left: 20px;
+    padding-top: 10px;
+    font-size: 14px;
+    line-height: 20px;
+}
+.pongcontainer{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.pongTXT{
+    border: 10px aliceblue solid;
+    border-radius: 20%;
+    background-color: aliceblue;
+    margin-top: 100px;
+    margin-left: 80px;
+    margin-bottom: 100px;
+    padding: 50px;
+    padding-top: 100px;
+    width: fit-content;
+}
+.pongwindow{
+    background-image: url(blackwindowL.png);
+    background-repeat: no-repeat;
+    width:100em;
+    height:40em;
+}
+.pongtab{
+padding-top: 2px;
+padding-left: 10px;
+color:aliceblue;
+text-decoration: underline;
+}
+.pong_iframe{
+    width: 100%;
+    height: 500px;
+    margin-left: 20px;
+    
+}

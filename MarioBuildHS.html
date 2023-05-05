@@ -1,0 +1,394 @@
+refresh page to start new game - use wad to move
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta name = "viewport" content = "width=device-width"> 
+<style> 
+* { 
+box-sizing:border-box; 
+margin:0; 
+padding:0; 
+} 
+html, body { 
+height:100%; 
+width:100%; 
+} 
+body { 
+align-content:space-around; 
+background-color:#202830; 
+color:#ffffff; 
+display:grid; 
+justify-content:center; 
+} 
+canvas { 
+background-color:#ffffff; 
+} 
+</style> 
+</head> 
+<body> 
+<canvas>
+  
+<!--NOTE!!! DOWNLOAD THESE IMGS JIC HE DELETES THE SITE--->
+
+
+ <img id= "gameovertext" src= "https://www.desktopbackground.org/download/1280x900/2015/07/26/985237_game-over-vintage-wallpaper-hd-desktop-wallpapers_2560x1440_h.jpg">
+  
+<img id="background" src="https://physicsland.net/mario/finalbackground.png">
+<img id="mario1" src="https://physicsland.net/mario/mariostandstill.png">
+<img id="mario1" src="https://physicsland.net/mario/mariostandstill.png"> 
+ <img id="mario2" src="https://physicsland.net/mario/mariorunright.png"> 
+ <img id="mario3" src="https://physicsland.net/mario/mariorunleft.png"> 
+ <img id="mario4" src="https://physicsland.net/mario/mariojumpright.png"> 
+ <img id="mario5" src="https://physicsland.net/mario/mariojumpleft.png">
+ <img id= "bowser" src= "https://physicsland.net/mario/bowser.png">
+ <img id= "fireball" src= "https://cdn131.picsart.com/324715383140211.png">
+ <img id= "axe" src= "https://physicsland.net/mario/axe.png">
+ <img id= "peach" src= "https://physicsland.net/mario/princesspeach.png">
+ <img id= "cage" src="https://cdn-icons-png.flaticon.com/512/851/851830.png">
+ <img id= "wintext" src= "https://physicsland.net/mario/wintext.png">
+  
+
+</canvas> 
+<script> 
+var context, controller, hero, loop;
+var myBackground1 = "background";
+var myGameOverText = "gameovertext";
+context = document.querySelector("canvas").getContext("2d"); 
+context.canvas.height = 400; 
+context.canvas.width = 800; 
+hero = { 
+height:20, 
+jumping:true, 
+width:20, 
+x:20, 
+y:280, 
+x_velocity:0, 
+y_velocity:0, 
+}; 
+  bowser = {
+    height: 60,
+    width: 60,
+    x: 700,
+    y: 230,
+    x_velocity:0,
+    y_velocity:0,
+  };
+  cage = {
+    height: 60,
+    width: 60,
+    x: 730,
+    y: 240,
+    x_velocity:0,
+    y_velocity:0,
+  };
+  peach = {
+    height: 60,
+    width: 60,
+    x: 730,
+    y: 245,
+    x_velocity:0,
+    y_velocity:0,
+  };
+  fireball = {
+    height: 20,
+    width: 20,
+    x: 500,
+    y: 500,
+    x_velocity:0,
+    y_velocity:0,
+  };
+   axe = {
+    height: 20,
+    width: 20,
+    x: 700,
+    y: 230,
+    x_velocity:0,
+    y_velocity:0,
+  };
+  wintext = {
+    height: 150,
+    width: 300,
+    x: -500,
+    y: 500,
+  };
+controller = { 
+left:false, 
+right:false, 
+up:false, 
+keyListener:function(event) {
+  
+var key_state = (event.type == "keydown")?true:false; switch(event.keyCode) { 
+    
+case 65: 
+controller.left = key_state; 
+break;
+case 87: 
+controller.up = key_state; 
+break; 
+case 68: 
+controller.right = key_state; 
+break; 
+} 
+} 
+}; 
+  
+loop = function() { 
+if (controller.up && hero.jumping == false) { hero.y_velocity -= 10; 
+hero.jumping = true; 
+} 
+if (controller.left) { 
+hero.x_velocity -= 5; //left velocity 
+} 
+if (controller.right) { 
+hero.x_velocity += 5; //right velocity 
+} 
+
+hero.x += hero.x_velocity; 
+hero.y += hero.y_velocity; 
+hero.y_velocity += 0.5; // gravity 
+hero.x_velocity *= 0.3; // friction 
+// if hero is falling below floor line 
+if (hero.y >= 360) { 
+hero.jumping = false; 
+hero.y = 360; 
+hero.y_velocity = 0; 
+} 
+var myMario1 = "mario1";
+var myMario2 = "mario2"; 
+var myMario3 = "mario3"; 
+var myMario4 = "mario4"; 
+var myMario5 = "mario5";
+
+if (hero.x_velocity >= 0.9){ 
+myMario1 = myMario2; 
+ }
+if (hero.x_velocity <= -0.4){ 
+myMario1 = myMario3; 
+ }
+
+ if (hero.y_velocity !== 0 && hero.x_velocity >= 0){ 
+myMario1 = myMario4; 
+ }
+ if (hero.y_velocity !== 0 && hero.x_velocity <= 0){ 
+myMario1 = myMario5; 
+ }
+
+  //////////////////////////////////
+  
+  //collision brick 1
+  
+  if(hero.y >= 270 && hero.x >= 0 && hero.x <= 78 && hero.y <= 290){
+    hero.y = 270
+    hero.jumping= false;
+    hero.y_velocity = 0;
+    hero.x_velocity = 0;
+  };
+  
+  //collision brick 2
+  
+   if(hero.y >= 270 && hero.x >= 178 && hero.x <= 248 && hero.y <= 290){
+    hero.y = 270
+    hero.jumping= false;
+    hero.y_velocity = 0;
+    hero.x_velocity = 0;
+  };
+  
+  //collision brick 3
+  
+   if(hero.y >= 270 && hero.x >= 340 && hero.y <= 290){
+    hero.y = 270
+    hero.jumping= false;
+    hero.y_velocity = 0;
+    hero.x_velocity = 0;
+  };
+  
+  ////////////////////////////////////
+  //bowser start
+  
+  var myBowser = "bowser";
+context.fillStyle = "#202020"; 
+context.fillRect(bowser.x, bowser.y, 60, 60);
+   var img = document.getElementById(myBowser); 
+  context.drawImage(img,0,0,40,40);  
+  
+ 
+    if(hero.y >= 500){
+      bowser.y = 500;
+    };
+   
+  
+  bowser.x += bowser.x_velocity;
+  bowser.y += bowser.y_velocity;
+  
+  //bowserleft
+ if(bowser.x  <= 400){
+   bowser.x= 400;
+   bowser.x_velocity = 3;
+ };
+ 
+  //bowser right
+  if(bowser.x >= 600){
+   bowser.x = 600;
+    bowser.x_velocity = -3;
+  };
+
+  //bowser jump
+  if(bowser.x >= 500 && bowser.x <= 530){
+    bowser.y_velocity = -15;
+  };
+  if(bowser.y <= 150 && bowser.y >= 140){
+    bowser.y_velocity= 15;
+   
+  };
+  if(bowser.y >= 230){
+    bowser.y = 230;
+  };
+  
+  
+  //bowser collision
+  
+  if(hero.x >= bowser.x - 22 && hero.x <= bowser.x + 42 && hero.y >= bowser.y -20){
+  
+    bowser.y = 500;
+    gameover();
+ 
+  };
+
+  //bowser end
+  ///////////////////////////////////
+  
+  //fireball start
+  
+   var myFireBall = "fireball";
+context.fillStyle = "#202020"; 
+context.fillRect(fireball.x, fireball.y, 60, 60);
+   var img = document.getElementById(myFireBall); 
+  context.drawImage(img,0,0,40,40);  
+ 
+  function spitFire(){
+    if(bowser.y >= 230 && bowser.x >= 500 && bowser.x <= 510){
+      fire.y = 500
+    }
+  };
+  
+  fireball.x += fireball.x_velocity;
+  fireball.y += fireball.y_velocity;
+  
+  //unfinished//
+  
+  
+  
+  //fireball end
+////////////////////////////////////
+  //axe start
+  var myAxe = "axe";
+  if(hero.x >= 690 && hero.y >= 200){
+    axe.y = 500;
+    bowser.y = -500000;
+    bowser.x_velocity = 0;
+    bowser.y_velocity = 0;
+    cage.y = 500;
+    wintext.y= 250;
+  }
+  
+  if(bowser.y <= -50000){
+    bowser.y = 500;
+    bowser.x = 500;
+    bowser.x_velocity= 0;
+    bowser.y_velocity= 0;
+    
+  }
+ 
+ if(hero.x >= 720){
+   hero.x = 720;
+  wintext.y = 0;
+   bowser.y = 500;
+ }
+
+ 
+  //axe end
+  
+  /////////////////////////////
+  
+  //peach start
+  
+  var myPeach = "peach";
+  var myCage = "cage";
+  var myWinText = "wintext";
+ 
+if(cage.x <= 500){
+   wintext.x = 200;
+   wintext.y = 0;
+   bowser.y = 500;
+   bowser.x = 1000;
+}
+ 
+  //peach end
+  
+  /////////////////////////////
+  
+  
+//background 
+  
+context.fillStyle = "#202020"; 
+context.fillRect(0, 0, 800, 400);
+//custom background image 
+var img = document.getElementById(myBackground1); context.drawImage(img,0,0,800,380); 
+  
+  //gameover
+  
+  var myGameOverText = "gameovertext";
+  function gameover(){
+    context.fillStyle = "#202020"; 
+context.fillRect(0, 0, 800, 400);
+var img = document.getElementById(myGameOverText); context.drawImage(img,0,0,800,380); 
+  }
+  
+  //lava
+  if(hero.y >= 315){
+    hero.y = 500;
+    bowser.y = 500;
+    gameover();
+    peach.y = 500;
+    axe.y = 500;
+    cage.y = 500;
+    wintext.y = 500;
+  }
+  
+  
+  
+  
+  
+//line 1 
+
+var img = document.getElementById(myMario1); 
+context.drawImage(img,hero.x,hero.y,20,20);
+  
+
+var img = document.getElementById(myBowser); 
+context.drawImage(img,bowser.x,bowser.y,60,60);
+  
+  
+ 
+var img = document.getElementById(myFireBall); 
+context.drawImage(img,fireball.x,fireball.y,60,60);
+  
+var img = document.getElementById(myAxe); 
+context.drawImage(img,axe.x,axe.y,60,60);
+  
+var img = document.getElementById(myPeach); 
+context.drawImage(img,peach.x,peach.y,60,60);
+
+var img = document.getElementById(myCage); 
+context.drawImage(img,cage.x,cage.y,60,60);  
+  
+var img = document.getElementById(myWinText);
+context.drawImage(img,wintext.x, wintext.y, 300, 150);
+  
+window.requestAnimationFrame(loop); 
+}; 
+window.addEventListener("keydown", controller.keyListener); window.addEventListener("keyup", controller.keyListener); window.requestAnimationFrame(loop); 
+</script> 
+</body> 
+</html>
+  

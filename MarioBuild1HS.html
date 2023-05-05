@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name = "viewport" content = "width=device-width">
+<style>
+* {
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+html, body {
+height:100%;
+width:100%;
+}
+body {
+align-content:space-around;
+background-color:#202830;
+color:#ffffff;
+display:grid;
+justify-content:center;
+}
+canvas {
+background-color:#ffffff;
+}
+</style>
+</head>
+<body>
+<canvas>
+
+  <!--images--->
+  <img id= "sky" src="https://physicsland.net/mario/background1.gif">
+  <img id ="pipe1" src="https://physicsland.net/mario/pipe1.png">
+  <img id ="platform1" src="https://physicsland.net/mario/platform1.png">
+  <img id ="gameovertext" src="https://www.desktopbackground.org/download/1280x900/2015/07/26/985237_game-over-vintage-wallpaper-hd-desktop-wallpapers_2560x1440_h.jpg">
+  <img id ="bricks" src="https://physicsland.net/mario/bricks.png">
+  <img id= "coin" src="https://physicsland.net/mario/coin.png">
+  <img id= "questionmark" src="https://physicsland.net/mario/questionmark.png">
+  <img id= "platform2" src="https://physicsland.net/mario/platform2.png">
+  <img id= "turtleright" src="https://physicsland.net/mario/turtleright.png">
+  <img id= "turtleleft" src="https://physicsland.net/mario/turtleleft.png">
+  <img id= "castle" src="https://physicsland.net/mario/castle.png">
+  <img id= "wintext" src= "https://physicsland.net/mario/wintext.png">
+  <img id= "princess" src= "https://physicsland.net/mario/princess.png" >
+  <img id= "mario1" src="https://physicsland.net/mario/mariostandstill.png">
+  <img id= "mario1" src="https://physicsland.net/mario/mariostandstill.png">
+  <img id= "mario2" src="https://physicsland.net/mario/mariorunright.png">
+  <img id= "mario3" src="https://physicsland.net/mario/mariorunleft.png">
+  <img id= "mario4" src="https://physicsland.net/mario/mariojumpright.png">
+  <img id= "mario5" src="https://physicsland.net/mario/mariojumpleft.png">
+  <img id= "enemy1" src="https://physicsland.net/mario/enemy1.png">
+</canvas>
+<script>
+
+var context, controller, hero, loop;
+var myBackground1= "sky";
+var myPipe1 = "pipe1"
+var myPlatform1 = "platform1";
+var myPlatform2 = "platform2";
+var castle = "castle";
+var myBricks = "bricks";
+var myQuestionmark = "questionmark";
+var enemy1velocity = -0.5;
+var turtlevelocity = -0.5;
+var score = 0;
+
+context = document.querySelector("canvas").getContext("2d");
+context.canvas.height = 400;
+context.canvas.width = 800;
+
+hero = {
+height:20,
+jumping:true,
+width:20,
+x:120,
+y:300,
+x_velocity:0,
+y_velocity:0
+};
+
+enemy1 = {
+  height:20,
+  width:20,
+  x:760,
+  y:360,
+  x_velocity:0,
+  y_velocity:0,
+};
+
+  gameovertext = {
+    height:150,
+    width:300,
+    x:-500,
+    y:100,
+  };
+
+  coin = {
+    height:20,
+    width:15,
+    x:130,
+    y:130
+  };
+
+  turtle = {
+    height:20,
+    width:20,
+    x:450,
+    y:180
+  };
+
+  princess= { 
+    height: 20,
+    width: 25,
+    x: -500,
+    y: 0,
+  };
+
+  wintext={
+    height: 150,
+    width: 300,
+    x: -500,
+    y: 0,
+  };
+
+controller = {
+left:false,
+right:false,
+up:false,
+
+keyListener:function(event) {
+var key_state = (event.type == "keydown")?true:false; switch(event.keyCode) {
+  case 65: 
+controller.left = key_state; 
+break;
+case 87: 
+controller.up = key_state; 
+break; 
+case 68: 
+controller.right = key_state; 
+break; 
+}
+}
+};
+
+loop = function() {
+if (controller.up && hero.jumping == false) { hero.y_velocity -= 10;  //basically meaning when he is not jumping, his verticle position is not increasing
+hero.jumping = true;
+} 
+
+
+if (controller.left) {
+hero.x_velocity -= 0.5; //if the left key (a) is hit he will move left
+}
+
+if (controller.right) {
+hero.x_velocity += 0.5; //if the right key (s) is hit he will move left
+}
+
+hero.x += hero.x_velocity;
+hero.y += hero.y_velocity;
+//repaints location
+
+hero.y_velocity += 0.5; // gravity
+hero.x_velocity *= 0.9; // friction
+
+
+  enemy1.x += enemy1velocity; //enemy1 (goomba) velocity
+  turtle.x += turtlevelocity; //turtle velocity
+
+
+
+if (hero.y >= 360) {
+hero.jumping = false;
+hero.y = 360;             //keeps mario sprite on floor level (prevents from clipping thru floor)
+hero.y_velocity = 0;
+}
+
+
+  var myMario1= "mario1";
+  var myMario2= "mario2";
+  var myMario3= "mario3";
+  var myMario4= "mario4";
+  var myMario5= "mario5";
+  var myEnemy1= "enemy1";
+  var myGameOverText = "gameovertext";
+  var myCoin = "coin";
+  var myTurtleLeft = "turtleleft";
+  var myTurtleRight = "turtleright";
+  var myPrincess = "princess";
+  var myWinText = "wintext";
+
+
+
+
+  if(hero.x_velocity>=0.1){
+    myMario1= myMario2;
+  }
+  if(hero.y_velocity != 0 && hero.x_velocity >= 0){
+    myMario1 = myMario4;
+  }                                                       //Sprite Changing, based on how you moved last (L, R, Up, Down). Sprite will change accordingly
+  if(hero.x_velocity<=-0.1){
+    myMario1= myMario3;
+  }
+  if(hero.y_velocity != 0 && hero.x_velocity <= 0){
+    myMario1 = myMario5;
+  }
+ 
+ 
+
+if (hero.x < -20) {
+hero.x = 800;
+} else if (hero.x > 800) {                                //If mario sprite moves off frame it moves to the other side
+mario.x = -20;
+}
+
+
+
+  if(hero.x >= enemy1.x - 19 && hero.x <= enemy1.x + 19 && hero.y >=345 ){
+    enemy1.x = 10000;                                                         //stomping on goomba    
+  }
+
+
+
+ 
+  if(hero.x >= enemy1.x - 22 && hero.x <= enemy1.x + 22 && hero.y >= 350){
+    hero.y_velocity = -10000;
+    gameovertext.x = 240;
+    gameovertext.y = 100;                                                 //collision with goomba
+  }
+
+
+  //enemy1 reverse direction when hits pipe1
+  if(enemy1.x <=220){
+    enemy1velocity = 0.5;
+  }
+
+
+//background
+context.fillStyle = "#202020";
+context.fillRect(0, 0, 800, 400);
+  //custom background image
+  var img= document.getElementById(myBackground1);
+  context.drawImage(img, 0, 0, 800, 380);
+//pipe1
+  var img = document.getElementById(myPipe1);
+  context.drawImage(img,200,320,20,60);
+  //platform 1
+  var img = document.getElementById(myPlatform1);
+  context.drawImage(img,270,250,60,130);
+  //enemy1
+  var img = document.getElementById(myEnemy1);
+  context.drawImage(img,enemy1.x,enemy1.y,20,20);
+  //bricks
+  var img = document.getElementById(myBricks);
+  context.drawImage(img,100,270,60,20);
+  //coin
+  var img = document.getElementById(myCoin);
+  context.drawImage(img,coin.x,coin.y,15,20);
+  //question mark
+  var img = document.getElementById(myQuestionmark);
+  context.drawImage(img,130,130,20,20)
+  //platform 2
+  var img = document.getElementById(myPlatform2);
+  context.drawImage(img,360,200,100,180);
+  //castle
+  var img= document.getElementById(castle);
+  context.drawImage(img, 540, 20, 260, 160);
+  
+  
+  //jumping on castle bricks
+  if(hero.y <= 142 && hero.x >=540){
+    hero.y = 142;
+    hero.y_velocity=0;
+    hero.jumping = false;
+  }
+  
+  
+  
+  //turtle
+  var img = document.getElementById(myTurtleLeft);
+  context.drawImage(img,turtle.x,turtle.y,20,20);
+  //princess
+  var img= document.getElementById(myPrincess);
+  context.drawImage(img, princess.x, princess.y, 20,20);
+  //win text
+  var img = document.getElementById(myWinText);
+  context.drawImage(img,wintext.x, wintext.y, 300, 150);
+  //jumping on pipe 1
+  if(hero.x >=180 && hero.x <= 220 && hero.y >= 300 && hero.y <=320){
+    hero.y = 300;
+    hero.y_velocity = 0;
+    hero.jumping = false;
+  }
+  //prevent walking through pipe 1 from left
+  if(hero.x >=180 && hero.x <= 185 && hero.y >= 300){
+    hero.x = 180;
+  }
+  //prevent walking through pipe 1 from right
+  if(hero.x <=220 && hero.x >=215 && hero.y >=300){
+    hero.x = 220;
+  }
+  //jumping on platform 1
+  if(hero.x >= 260 && hero.x <= 320 && hero.y >= 228 && hero.y <=243 ){
+    hero.y = 228;
+    hero.y_velocity = 0;
+    hero.jumping = false;
+  }
+  //jumping on platform 2
+  if(hero.x >= 345 && hero.x <= 465 && hero.y >= 180 && hero.y <=194){
+    hero.y = 180;
+    hero.y_velocity = 0;
+    hero.jumping = false;
+  }
+  //left turtle moves to right
+  if(turtle.x <= 365){
+    turtlevelocity = 0.5;
+  }
+  //turtle faces right
+  if(turtlevelocity >= 0){
+    myTurtleLeft = myTurtleRight;
+  }
+  //right turtle moves to the left
+  if(turtle.x >= 450){
+    turtlevelocity = -0.5;
+  }
+  //turtle faces left
+  if(turtlevelocity <= 0){
+    myTurtleRight = myTurtleLeft;
+  }
+  //stomping Turtle
+  if(hero.x >= turtle.x - 19 && hero.x <= turtle.x + 19 && hero.y >= 170 && hero.y <= 180){
+    turtle.x= 100000;
+  }
+  //when turtle collides with mario
+  if(hero.x >= turtle.x - 22 && hero.x <= turtle.x + 22 && hero.y >= 175 && hero.y <= 180){
+    gameovertext.x= 240;
+    gameovertext.y= 100;
+    hero.y_velocity= -100000;
+  }
+  //jumping on bricks
+  if(hero.x >= 90 && hero.x <= 155 && hero.y <=250 && hero.y >=247){
+    hero.y = 250;
+    hero.y_velocity = 0;
+    hero.jumping = false;
+  }
+  //brick collision
+  if(hero.y <= 270 && hero.x >= 90 && hero.x <= 150 && hero.y >= 260){
+    hero.y=280;
+    hero.y_velocity= 0;
+  }
+  //brick collision 2 //castle bricks collsion
+  
+  
+  
+  //score
+  if(hero.y <=150 && hero.x >= 120 && hero.x <= 140){
+    score++;
+  }
+  //coin shoots up at 10 points
+  if(score == 10){
+    coin.y += -2;
+  }
+  //reset coin in question mark
+  if(score >=15 && score <=19){
+    coin.y = 130;
+    coin.x = 130;
+  }
+  //coin shoots up at 20 points
+  if(score == 20){
+    coin.y += -2;
+  }
+  //stop score from increasing beyond 20
+  if(score >= 20){
+    score = 20;
+  }
+  //win game
+  if(hero.x >= 735 && hero.y <= 200){
+    wintext.x = 200;
+    wintext.y=0;
+    princess.x = 595;
+    princess.y = 141;
+  }
+  //transport Mario to princess after win
+  if(hero.x>= 736){
+    hero.x=610;
+  }
+  //line 1
+context.strokeStyle = "#606060";
+context.lineWidth = 4;
+context.beginPath();
+context.moveTo(0, 382);
+context.lineTo(800, 382);
+context.stroke();
+//score text
+  context.font = "28px Arial"
+  context.fillstyle = "#00ffff"
+  context.fillText("Score:" + score,8,30)
+//gameovertext
+  var img = document.getElementById(myGameOverText);
+  context.drawImage(img,gameovertext.x,gameovertext.y,300,150);
+  var img= document.getElementById(myMario1);
+  context.drawImage(img, hero.x, hero.y, 20,20)
+window.requestAnimationFrame(loop);
+};
+window.addEventListener("keydown", controller.keyListener); window.addEventListener("keyup", controller.keyListener); window.requestAnimationFrame(loop);
+</script>
+</body>
+</html>
+
